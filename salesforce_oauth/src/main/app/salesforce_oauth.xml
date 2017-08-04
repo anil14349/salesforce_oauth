@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <sfdc:config-with-oauth name="Salesforce__OAuth_v2_0" consumerKey="3MVG9d8..z.hDcPKRYhjVS_cJW1Pc8SCm43ZhgXHUEXerCXCDcOeC6A7xsIG04SaGXkH9ynbFpuPaIAZtttbk" consumerSecret="7924880929873313786" doc:name="Salesforce: OAuth v2.0">
+        <sfdc:oauth-callback-config domain="localhost" localPort="8080" path="callback"/>
+    </sfdc:config-with-oauth>
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8082" doc:name="HTTP Listener Configuration"/>
+    <flow name="OAuthTestFlow1" >
+    <http:listener config-ref="HTTP_Listener_Configuration" path="/authorize" doc:name="HTTP Connector"/>
+    <sfdc:authorize config-ref="Salesforce__OAuth_v2_0" display="PAGE" doc:name="Salesforce" accessTokenUrl="https://na1.salesforce.com/services/oauth2/token" authorizationUrl="https://na1.salesforce.com/services/oauth2/authorize"/>
+        <sfdc:get-server-url config-ref="Salesforce__OAuth_v2_0" doc:name="Salesforce"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+</flow>
+</mule>
