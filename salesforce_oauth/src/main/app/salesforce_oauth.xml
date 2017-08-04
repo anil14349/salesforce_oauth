@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
-    <sfdc:config-with-oauth name="Salesforce__OAuth_v2_0" consumerKey="3MVG9d8..z.hDcPKRYhjVS_cJW1Pc8SCm43ZhgXHUEXerCXCDcOeC6A7xsIG04SaGXkH9ynbFpuPaIAZtttbk" consumerSecret="7924880929873313786" doc:name="Salesforce: OAuth v2.0">
+    <sfdc:config-with-oauth name="Salesforce__OAuth_v2_0" consumerKey="${salesforce.consumer.key}" consumerSecret="${salesforce.consumer.secret}" doc:name="Salesforce: OAuth v2.0">
         <sfdc:oauth-callback-config domain="localhost" localPort="8080" path="callback"/>
     </sfdc:config-with-oauth>
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8082" doc:name="HTTP Listener Configuration"/>
